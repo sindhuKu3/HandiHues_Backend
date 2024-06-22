@@ -28,7 +28,7 @@ const User = require("./models/user");
 const opts = {};
 opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = process.env.JWT_SECRET_KEY;
-server.use(express.static(path.resolve(__dirname, "build")));
+app.use(express.static(path.resolve(__dirname, "build")));
 app.use(cookieParser());
 app.use(
   session({
