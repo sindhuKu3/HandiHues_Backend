@@ -55,9 +55,9 @@ app.use(
   })
 );
 app.set("trust proxy", 1);
-// app.get("/", (req, res) => {
-//   res.json({ status: "success" });
-// });
+app.get("/", (req, res) => {
+  res.json({ status: "success" });
+});
 app.use("/products", isAuth(), productRoute);
 app.use("/users", isAuth(), userRoute);
 app.use("/auth", authRoute);
