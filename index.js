@@ -58,7 +58,7 @@ app.use(
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
 }); 
-// app.set("trust proxy", 1);
+ app.set("trust proxy", 1);
 app.get("/", (req, res) => {
   res.json({ status: "success" });
 });
