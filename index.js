@@ -43,7 +43,7 @@ app.use(
   })
 );
 app.use(passport.authenticate("session"));
-app.use(express.static(path.resolve(__dirname, "build")));
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
