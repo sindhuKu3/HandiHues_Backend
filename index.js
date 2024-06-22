@@ -24,6 +24,7 @@ const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const passport = require("passport");
 const User = require("./models/user");
+const { env } = require("process");
 //middlewares
 const opts = {};
 opts.jwtFromRequest = cookieExtractor;
@@ -32,7 +33,7 @@ app.use(express.static(path.resolve(__dirname, "build")));
 app.use(cookieParser());
 app.use(
   session({
-    secret:process.env.SESSION_KEY,
+    secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -43,22 +44,17 @@ app.use(
   })
 );
 app.use(passport.authenticate("session"));
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
 app.use(
   cors({
     exposedHeaders: ["X-Total-Count"],
-    origin: ["https://handi-hues-frontend.vercel.app/"],
-    methods: ["POST", "GET"],
-    credentials: true,
+   
   })
 );
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-}); 
- app.set("trust proxy", 1);
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+
+app.set("trust proxy", 1);
 app.get("/", (req, res) => {
   res.json({ status: "success" });
 });
@@ -67,7 +63,9 @@ app.use("/users", isAuth(), userRoute);
 app.use("/auth", authRoute);
 app.use("/carts", isAuth(), cartRoute);
 app.use("/orders", isAuth(), orderRoute);
-
+app.get("*", (req, res) =>
+  res.sendFile(path.resolve("build", "index.html"))
+);
 passport.use(
   "local",
   new LocalStrategy({ usernameField: "email" }, async function (
@@ -139,6 +137,7 @@ passport.deserializeUser(function (user, cb) {
     return cb(null, user);
   });
 });
+main().catch((err) => console.log(err));
 
 const server = () => {
   db();
