@@ -50,7 +50,8 @@ app.use(express.json());
 app.use(
   cors({
     exposedHeaders: ["X-Total-Count"],
-    origin: "http://localhost:3000",
+    origin: "https://handi-hues-frontend.vercel.app/",
+    methods: ["POST", "GET"],
     credentials: true,
   })
 );
