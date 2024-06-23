@@ -36,11 +36,11 @@ app.use(
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      maxAge: 360000, //one week(1000*60*60*24*7)
-      sameSite: "none",
-      secure: true,
-    },
+    // cookie: {
+    //   maxAge: 360000, //one week(1000*60*60*24*7)
+    //   sameSite: "none",
+    //   secure: true,
+    // },
   })
 );
 app.use(passport.authenticate("session"));
