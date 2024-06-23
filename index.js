@@ -137,7 +137,7 @@ passport.deserializeUser(function (user, cb) {
     return cb(null, user);
   });
 });
-main().catch((err) => console.log(err));
+
 
 const server = () => {
   db();
