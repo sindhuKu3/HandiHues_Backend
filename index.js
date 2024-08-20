@@ -75,7 +75,7 @@ passport.use(
   ) {
     try {
       const user = await User.findOne({ email: email });
-      console.log({ email, password });
+      // console.log({ email, password });
       if (!user) {
         return done(null, false, { message: "invalid credential" });
       }
@@ -107,7 +107,7 @@ passport.use(
 passport.use(
   "jwt",
   new JwtStrategy(opts, async function (jwt_payload, done) {
-    console.log({ jwt_payload });
+    // console.log({ jwt_payload });
     try {
       const user = await User.findById(jwt_payload.id);
       // jwt_payload.id;
@@ -124,7 +124,7 @@ passport.use(
 
 //serializable
 passport.serializeUser(function (user, cb) {
-  console.log("serialize:", user);
+  // console.log("serialize:", user);
   process.nextTick(function () {
     return cb(null, { id: user.id, role: user.role });
   });
@@ -132,7 +132,7 @@ passport.serializeUser(function (user, cb) {
 
 //deserializable
 passport.deserializeUser(function (user, cb) {
-  console.log("Deserialize:", user);
+  // console.log("Deserialize:", user);
   process.nextTick(function () {
     return cb(null, user);
   });

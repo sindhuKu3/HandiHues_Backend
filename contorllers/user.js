@@ -5,7 +5,7 @@ async function fetchUserById(req, res) {
 
   try {
     const user = await User.findById(id);
-    console.log("fetchUserById", user);
+    // console.log("fetchUserById", user);
     res
       .status(201)
       .json({
