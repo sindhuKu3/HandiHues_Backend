@@ -1,8 +1,11 @@
 const Product = require("../models/product");
 //POST REQUEST TO ADD NEW PRODUCT
 async function createProduct(req, res) {
-  const product = new Product(req.body);
 
+  const product = new Product(req.body);
+  product.discountPrice = Math.round(
+    product.price * (1 - product.discountPercentage / 100)
+  );
   try {
     const doc = await product.save();
     res.status(200).json(doc);
@@ -113,10 +116,19 @@ async function updateProductById(req, res) {
   const { id } = req.params;
 
   try {
-    const product = await Product.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
-    res.status(200).json(product);
+    // const product = await Product.findByIdAndUpdate(id, req.body, {
+    //   new: true,
+    // });
+    // res.status(200).json(product);
+
+     const product = await Product.findByIdAndUpdate(id, req.body, {
+       new: true,
+     });
+     product.discountPrice = Math.round(
+       product.price * (1 - product.discountPercentage / 100)
+     );
+     const updatedProduct = await product.save();
+     res.status(200).json(updatedProduct);
   } catch (error) {
     res.status(400).json(error);
   }
