@@ -13,7 +13,7 @@ const crypto = require("crypto");
 const cookieParser = require("cookie-parser");
 const { db } = require("./db/db");
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT ;
 
 const path = require("path");
 const cors = require("cors");
@@ -29,7 +29,6 @@ const { env } = require("process");
 const opts = {};
 opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = process.env.JWT_SECRET_KEY;
-app.use(express.static(path.resolve(__dirname, "build")));
 app.use(cookieParser());
 app.use(
   session({
@@ -44,10 +43,12 @@ app.use(
   })
 );
 app.use(passport.authenticate("session"));
+
 app.use(
   cors({
-    exposedHeaders: ["X-Total-Count"],
-   
+    origin: "http://localhost:3000", // Replace with your frontend's URL
+    credentials: true, // Allows credentials such as cookies to be sent
+    exposedHeaders: ["X-Total-Count"], // Expose specific headers if needed
   })
 );
 app.use(express.urlencoded({ extended: false }));

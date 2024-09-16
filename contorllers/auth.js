@@ -44,6 +44,7 @@ async function createUser(req, res) {
 //LOGIN
 async function loginUser(req, res) {
   const user = req.user;
+  console.log("user token "+req.user.token)
   res
     .cookie("jwt", req.user.token, {
       expires: new Date(Date.now() + 3600000),
