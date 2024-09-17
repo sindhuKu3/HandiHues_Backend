@@ -53,7 +53,8 @@ app.use(passport.authenticate("session"));
 // );
 app.use(
   cors({
-    origin: "https://playful-vacherin-6b30f2.netlify.app",
+    origin:
+      "https://regal-gumption-81104a.netlify.app" || "http://localhost:3000",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Add OPTIONS here
     credentials: true,
     exposedHeaders: ["X-Total-Count"],
