@@ -5,10 +5,8 @@ const express = require("express");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const LocalStrategy = require("passport-local").Strategy;
-
 const { isAuth, sanitizeUser, cookieExtractor } = require("./services/common");
 const jwt = require("jsonwebtoken");
-
 const crypto = require("crypto");
 const cookieParser = require("cookie-parser");
 const { db } = require("./db/db");
@@ -29,6 +27,7 @@ const { env } = require("process");
 const opts = {};
 opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = process.env.JWT_SECRET_KEY;
+app.use(express.static(path.resolve(__dirname, "build")));
 app.use(cookieParser());
 app.use(
   session({
