@@ -54,7 +54,7 @@ app.use(passport.authenticate("session"));
 app.use(
   cors({
     origin:
-      "https://regal-gumption-81104a.netlify.app" || "http://localhost:3000",
+      "https://regal-gumption-81104a.netlify.app",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Add OPTIONS here
     credentials: true,
     exposedHeaders: ["X-Total-Count"],
