@@ -11,7 +11,7 @@ const crypto = require("crypto");
 const cookieParser = require("cookie-parser");
 const { db } = require("./db/db");
 const app = express();
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT || 8000 ;
 
 const path = require("path");
 const cors = require("cors");
@@ -53,8 +53,7 @@ app.use(passport.authenticate("session"));
 // );
 app.use(
   cors({
-    origin:
-      "https://regal-gumption-81104a.netlify.app",
+    origin: "https://cerulean-nougat-146714.netlify.app",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Add OPTIONS here
     credentials: true,
     exposedHeaders: ["X-Total-Count"],
