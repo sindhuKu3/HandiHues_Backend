@@ -53,7 +53,7 @@ app.use(passport.authenticate("session"));
 // );
 app.use(
   cors({
-    origin: "https://cerulean-nougat-146714.netlify.app",
+    origin: "https://gregarious-tiramisu-ae5c57.netlify.app",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Add OPTIONS here
     credentials: true,
     exposedHeaders: ["X-Total-Count"],
