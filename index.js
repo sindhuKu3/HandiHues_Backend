@@ -45,7 +45,7 @@ app.use(passport.authenticate("session"));
 
 app.use(
   cors({
-    origin: "https://lighthearted-yeot-9cb818.netlify.app",
+    origin: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Add OPTIONS here
     credentials: true,
     exposedHeaders: ["X-Total-Count"],
