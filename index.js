@@ -43,17 +43,9 @@ app.use(
 );
 app.use(passport.authenticate("session"));
 
-// app.use(
-//   cors({
-//     origin:
-//       "https://66e90263b2cde98c59a25cd8--playful-vacherin-6b30f2.netlify.app", // Replace with your frontend's URL
-//     credentials: true, // Allows credentials such as cookies to be sent
-//     exposedHeaders: ["X-Total-Count"], // Expose specific headers if needed
-//   })
-// );
 app.use(
   cors({
-    origin: "https://gregarious-tiramisu-ae5c57.netlify.app",
+    origin: "http://localhost:3000",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Add OPTIONS here
     credentials: true,
     exposedHeaders: ["X-Total-Count"],
