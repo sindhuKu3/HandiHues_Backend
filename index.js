@@ -45,7 +45,7 @@ app.use(passport.authenticate("session"));
 
 app.use(
   cors({
-    origin: true,
+    origin: "https://loquacious-macaron-74c59e.netlify.app/",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Add OPTIONS here
     credentials: true,
     exposedHeaders: ["X-Total-Count"],
