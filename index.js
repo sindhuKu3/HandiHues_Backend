@@ -22,7 +22,7 @@ app.use(checkForAuthenticationCookie("token"));
 
 app.use(
   cors({
-    origin: "https://rainbow-daifuku-84746d.netlify.app/",
+    origin: "https://rainbow-daifuku-84746d.netlify.app",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Add OPTIONS here
     credentials: true,
     exposedHeaders: ["X-Total-Count"],
