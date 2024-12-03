@@ -29,11 +29,7 @@ async function loginUser(req, res){
 
   try {
     const token = await User.matchPasswordAndGenerateToken(email, password);
-    res.cookie("token", token, {
-      httpOnly: true, // Prevent access via JavaScript
-      secure: false, // Use `true` in production when using HTTPS
-      sameSite: "strict", // Mitigates CSRF attacks
-    });
+    res.cookie("token", token);
 
     return res.status(200).json({
       message: "User login successful",
