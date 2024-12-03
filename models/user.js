@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
     password: {
-      type: Buffer,
+      type: String,
       required: true,
     },
     role: {
@@ -27,7 +27,9 @@ const userSchema = new mongoose.Schema(
     orders: {
       type: [mongoose.Schema.Types.Mixed],
     },
-    salt: Buffer,
+    salt:{
+      type:String,
+    },
   },
   { timestamps: true }
 );
@@ -43,40 +45,50 @@ userSchema.set("toJSON", {
     delete ret._id;
   },
 });
+
+//matching of password given by user with password which we already have in our db for that user
 userSchema.pre("save", function (next) {
   const user = this;
+
+  // Only hash the password if it has been modified
   if (!user.isModified("password")) {
-    return;
+    return next();
   }
-  const salt = randomBytes(16).toString();
+
+  const salt = randomBytes(16).toString("hex"); // Generate a new salt
   const hashedPassword = createHmac("sha256", salt)
-    .update(user.password)
+    .update(user.password) // Use the plain text password here
     .digest("hex");
 
-  this.salt = salt;
-  this.password = hashedPassword;
+  user.salt = salt;
+  user.password = hashedPassword; // Store the hashed password as a string
   next();
 });
-//matching of password given by user with password which we already have in our db for that user
+
 userSchema.static(
   "matchPasswordAndGenerateToken",
   async function (email, password) {
     const user = await this.findOne({ email });
-    if (!user) throw new Error("user not found");
+    if (!user) {
+      throw new Error("User not found");
+    }
+
     const salt = user.salt;
-    const hashedpassword = user.password;
+    const hashedPassword = user.password; // Retrieved password is already a string
     const userProvidedHash = createHmac("sha256", salt)
       .update(password)
       .digest("hex");
-    if (hashedpassword !== userProvidedHash) {
-      throw new Error("incorrect password");
+
+    if (hashedPassword !== userProvidedHash) {
+      throw new Error("Incorrect password");
     }
+
+    // Generate token
     const token = createTokenForUser(user);
-    console.log(token);
+ 
     return token;
   }
 );
-
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

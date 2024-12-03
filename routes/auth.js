@@ -5,7 +5,6 @@ const router = Router();
 
 router.post("/signup", createUser);
 router.post("/login",loginUser);
-// passport.authenticate("local"),
   router.get("/check",  checkAuth);
-//   passport.authenticate("jwt"),
-   (module.exports = router);
+
+   module.exports = router ;
