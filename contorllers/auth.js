@@ -30,7 +30,6 @@ async function loginUser(req, res){
   try {
     const token = await User.matchPasswordAndGenerateToken(email, password);
     res.cookie("token", token);
-
     return res.status(200).json({
       message: "User login successful",
     });
@@ -43,10 +42,11 @@ async function loginUser(req, res){
 
 //IF USER EXIST SIMPLY RETURNING THE USER OBJECT
 async function checkAuth(req, res) {
+  console.log("checkAuth called", req.user); 
   if (req.user) {
     res.json(req.user);
   } else {
-    res.sendStatus(401);
+    res.sendStatus(401); // User not authenticated
   }
 }
 

@@ -2,6 +2,7 @@ const Cart = require("../models/cart");
 
 //GET REQUEST TO FETCH ALL THE ITEM IN THE CART OF LOGIN USER
 async function fetchCartByUser(req, res) {
+ 
   const { id } = req.user;
   try {
     const cartItems = await Cart.find({ user: id }).populate("product");

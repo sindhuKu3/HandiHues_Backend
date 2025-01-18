@@ -103,7 +103,6 @@ async function fetchProductById(req, res) {
 
 async function updateProductById(req, res) {
   const { id } = req.params;
-
   try {
     // Find the existing product
     const product = await Product.findById(id);

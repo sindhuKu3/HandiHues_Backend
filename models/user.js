@@ -49,17 +49,14 @@ userSchema.set("toJSON", {
 //matching of password given by user with password which we already have in our db for that user
 userSchema.pre("save", function (next) {
   const user = this;
-
   // Only hash the password if it has been modified
   if (!user.isModified("password")) {
     return next();
   }
-
   const salt = randomBytes(16).toString("hex"); // Generate a new salt
   const hashedPassword = createHmac("sha256", salt)
     .update(user.password) // Use the plain text password here
     .digest("hex");
-
   user.salt = salt;
   user.password = hashedPassword; // Store the hashed password as a string
   next();
