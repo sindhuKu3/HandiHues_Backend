@@ -24,7 +24,7 @@ app.use(express.static(path.resolve(__dirname, "build")));
 
 app.use(
   cors({
-    origin: "https://stellar-pudding-db7e3a.netlify.app",
+    origin: "https://snazzy-sunshine-11cd36.netlify.app",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Add OPTIONS here
     credentials: true,
     exposedHeaders: ["X-Total-Count"],
