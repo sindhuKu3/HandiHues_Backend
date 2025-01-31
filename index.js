@@ -30,6 +30,10 @@ app.use(
     exposedHeaders: ["X-Total-Count"],
   })
 );
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
